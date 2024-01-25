@@ -8,8 +8,8 @@ t_philo	*set_philosopher(t_info *info, int id)
 	if (!philo)
 		return (NULL);
 	philo->id = id;
-	philo->right_fork = info->forks[id]
-	philo->left_fork = info->forks[(id + 1) % info->number_of_p];
+	philo->right_fork = &(info->forks[id]);
+	philo->left_fork = &(info->forks[(id + 1) % info->number_of_p]);
 	philo->last_eat = get_current_time();
 	philo->eat_count = 0;
 	return (philo);
@@ -23,10 +23,14 @@ int	start_threads(t_info *info)
 	i = 0;
 	while (i < info->number_of_p)
 	{
-		p = set_philosopher(info);
+		p = set_philosopher(info, i);
 		if (!p)
 			return (0);
+		if (pthread_create(info->philos[i], NULL, NULL, p))
+			return (0);
+		i++;
 	}
+	return (1);
 }
 
 int	allocate_threads(t_info *info)
@@ -40,7 +44,7 @@ int	allocate_threads(t_info *info)
 		return (0);
 	while (i < info->number_of_p)
 	{
-		if (!pthread_mutex_init(info->forks[i], NULL))
+		if (!pthread_mutex_init(&(info->forks[i]), NULL))
 			return (0);
 		i++;
 	}

@@ -6,13 +6,13 @@ long	get_current_time()
 
 	if (gettimeofday(&tv, NULL) == -1)
 		return (-1);
-	return ()
+	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
 }
 
 int	message_exit()
 {
 	printf("Please use the syntax below:\n");
-	printf("./philo [number of philosophers] " + 
+	printf("./philo [number of philosophers] "
 	"[time to die] [time to eat] [time to sleep]\n");
 	printf("You can also add [number that each philosopher should eat]\n");
 	printf("!!!And don't forget, giving natural numbers\n");
