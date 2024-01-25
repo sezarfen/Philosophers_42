@@ -65,7 +65,6 @@ int main(int argc, char *argv[])
 
 	if (argc != 5 && argc != 6)
 		return (EXIT_FAILURE);
-	printf("-1-1-1");
 	if (set_info(&info, argc, argv))
 		return (message_exit_2());
 	printf("000");
