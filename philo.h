@@ -27,6 +27,7 @@ typedef struct s_philo
 	pthread_mutex_t	*right_fork;
 	long			last_eat;
 	int				eat_count;
+	t_info			*info;
 }	t_philo;
 
 int	message_exit();

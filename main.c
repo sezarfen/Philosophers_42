@@ -1,5 +1,18 @@
 #include "philo.h"
 
+void	*life_of_philo(void *arg)
+{
+	t_philo *p;
+
+	p = (t_philo *)arg;
+	while (1)
+	{
+		// eating
+		// sleep
+		// think
+	}
+}
+
 t_philo	*set_philosopher(t_info *info, int id)
 {
 	t_philo *philo;
@@ -7,6 +20,7 @@ t_philo	*set_philosopher(t_info *info, int id)
 	philo = malloc(sizeof(t_philo));
 	if (!philo)
 		return (NULL);
+	philo->info = info;
 	philo->id = id;
 	philo->right_fork = &(info->forks[id]);
 	philo->left_fork = &(info->forks[(id + 1) % info->number_of_p]);
@@ -26,7 +40,9 @@ int	start_threads(t_info *info)
 		p = set_philosopher(info, i);
 		if (!p)
 			return (0);
-		if (pthread_create(info->philos[i], NULL, NULL, p))
+		if (pthread_create(info->philos[i], NULL, life_of_philo, p))
+			return (0);
+		if (pthread_detach(info->philos[i]) != 0)
 			return (0);
 		i++;
 	}
