@@ -51,6 +51,6 @@ int	ft_atoi(char *str)
 		i++;
 	}
 	while (str[i] <= '9' && str[i] >= '0')
-		result = (result * 10) + (str[i] - 48);
+		result = (result * 10) + (str[i++] - 48);
 	return (result * n);
 }

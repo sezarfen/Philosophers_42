@@ -44,7 +44,7 @@ int	allocate_threads(t_info *info)
 		return (0);
 	while (i < info->number_of_p)
 	{
-		if (!pthread_mutex_init(&(info->forks[i]), NULL))
+		if (pthread_mutex_init(&(info->forks[i]), NULL) != 0)
 			return (0);
 		i++;
 	}
@@ -65,15 +65,16 @@ int main(int argc, char *argv[])
 
 	if (argc != 5 && argc != 6)
 		return (EXIT_FAILURE);
+	printf("aaaaaaaaaaa\n");
 	if (set_info(&info, argc, argv))
 		return (message_exit_2());
-	printf("000");
+	printf("000\n");
 	if (!check_info(&info))
 		return (message_exit());
-	printf("111");
+	printf("111\n");
 	if (!allocate_threads(&info))
 		return (message_exit_2());
-	printf("222");
+	printf("222\n");
 	if (!start_threads(&info))
 		return (message_exit_2());
 }
