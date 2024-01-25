@@ -2,9 +2,9 @@
 
 void	*life_of_philo(void *arg)
 {
-	t_philo *p;
+	t_philo *philo;
 
-	p = (t_philo *)arg;
+	philo = (t_philo *)arg;
 	while (1)
 	{
 		// eating
@@ -80,6 +80,7 @@ int	set_info(t_info *info, int argc, char *argv[])
 		info->eat_count_check = 1;
 		info->each_philo_eat = ft_atoi(argv[5]);
 	}
+	info->time_start = get_current_time();
 	if (pthread_mutex_init(&(info->print_mutex), NULL));
 		return (0);
 }

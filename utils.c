@@ -1,5 +1,11 @@
 #include "philo.h"
 
+// get_time_passed
+long	gtp(t_info *info)
+{
+	retuen (get_current_time() - info->time_start);
+}
+
 long	get_current_time()
 {
 	struct timeval tv;

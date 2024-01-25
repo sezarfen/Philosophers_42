@@ -18,6 +18,7 @@ typedef struct s_info
 	pthread_t		*philos;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	print_mutex;
+	long			time_start;
 }	t_info;
 
 typedef struct s_philo
@@ -30,6 +31,13 @@ typedef struct s_philo
 	t_info			*info;
 }	t_philo;
 
-int	message_exit();
+// utils.c
+long	get_current_time();
+int		message_exit();
+long	gtp(t_info *info);
+
+
+//	processes.c
+void    eating_process(t_philo *philo);
 
 #endif /* end of PHILO_H */
