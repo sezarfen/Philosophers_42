@@ -15,7 +15,7 @@ typedef struct s_philo
 	long			last_eat;
 	int				eat_count;
 	pthread_mutex_t	eat_mutex;
-	t_info			*info;
+	struct s_info	*info;
 }	t_philo;
 
 typedef struct s_info
@@ -50,6 +50,12 @@ void	ft_usleep(long ms);
 t_philo	*set_philosopher(t_info *info, int id);
 int		set_info(t_info *info, int argc, char *argv[]);
 
+// main.c
+int		start_checker(t_info *info);
+void	*life_of_philo(void *arg);
+int		start_threads(t_info *info);
+int		allocate_threads(t_info *info);
+int 	check_info(t_info *info);
 
 
 #endif /* end of PHILO_H */

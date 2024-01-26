@@ -1,6 +1,6 @@
 #include "philo.h"
 
-void	start_checker(t_info *info)
+int	start_checker(t_info *info)
 {
 	int	i;
 
@@ -9,9 +9,12 @@ void	start_checker(t_info *info)
 	{
 		if (gtp(info) - (info->philosophers[i]->last_eat * 1000)
 			> info->time_to_die)
+		{
+			printf("%ld %d died", gtp(info), id);
 			return (1);
+		}
 		i++;
-		if (i > info->number_of_p) // farklı bir şekilde de yapılabilir "%"ile
+		if (i > info->number_of_p) // farklı bir şekilde de yapılabilir "%" ile mesela
 			i = 0;
 	}
 }
@@ -84,7 +87,7 @@ int main(int argc, char *argv[])
 	if (argc != 5 && argc != 6)
 		return (EXIT_FAILURE);
 	if (set_info(&info, argc, argv))
-		return (message_exit_2());;;;
+		return (message_exit_2());
 	printf("aaa\n");
 	if (!check_info(&info))
 		return (message_exit());
