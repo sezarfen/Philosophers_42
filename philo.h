@@ -1,11 +1,23 @@
-#ifndef PHILO_H
-#define PHILO_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fdundar <fdundar@student.42istanbul.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/27 00:27:21 by fdundar           #+#    #+#             */
+/*   Updated: 2024/01/27 00:27:21 by fdundar          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/time.h>
-#include <pthread.h>
-#include <unistd.h>
+#ifndef PHILO_H
+# define PHILO_H
+
+# include <stdio.h>
+# include <stdlib.h>
+# include <sys/time.h>
+# include <pthread.h>
+# include <unistd.h>
 
 typedef struct s_philo
 {
@@ -21,9 +33,9 @@ typedef struct s_philo
 typedef struct s_info
 {
 	int				number_of_p;
-	int		 		time_to_die;
+	int				time_to_die;
 	int				time_to_eat;
-	int			 	time_to_sleep;
+	int				time_to_sleep;
 	int				eat_count_check;
 	int				each_philo_eat;
 	pthread_t		*philo_threads;
@@ -33,28 +45,30 @@ typedef struct s_info
 	long			time_start;
 }	t_info;
 
-// utils.c
-long	get_current_time();
-int		message_exit();
-int		message_exit_2();
-long	gtp(t_info *info);
-int		ft_atoi(char *str);
-
-//	processes.c
-void    eating_process(t_philo *philo);
-void	sleeping_process(t_philo *philo);
-void    thinking_process(t_philo *philo);
-void	ft_usleep(long ms);
-
-// setters.c
-void	set_philosopher(t_philo *philo, t_info *info, int id);
-int		set_info(t_info *info, int argc, char *argv[]);
-
 // main.c
 int		start_checker(t_info *info);
-void	*life_of_philo(void *arg);
 int		start_threads(t_info *info);
 int		allocate_threads(t_info *info);
-int 	check_info(t_info *info);
+
+// info.c
+int		check_info(t_info *info);
+int		set_info(t_info *info, int argc, char *argv[]);
+
+// philosopher.c
+void	eating_process(t_philo *philo);
+void	sleeping_process(t_philo *philo);
+void	thinking_process(t_philo *philo);
+void	*life_of_philo(void *arg);
+void	set_philosopher(t_philo *philo, t_info *info, int id);
+
+// times.c
+long	gtp(t_info *info);
+long	get_current_time(void);
+
+// utils.c
+int		message_exit(void);
+int		message_exit_2(void);
+int		ft_atoi(char *str);
+void	ft_usleep(long ms);
 
 #endif /* end of PHILO_H */
