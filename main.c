@@ -1,5 +1,21 @@
 #include "philo.h"
 
+void	start_checker(t_info *info)
+{
+	int	i;
+
+	i = 0;
+	while (1)
+	{
+		if (gtp(info) - (info->philosophers[i]->last_eat * 1000)
+			> info->time_to_die)
+			return (1);
+		i++;
+		if (i > info->number_of_p) // farklı bir şekilde de yapılabilir "%"ile
+			i = 0;
+	}
+}
+
 void	*life_of_philo(void *arg)
 {
 	t_philo *philo;
