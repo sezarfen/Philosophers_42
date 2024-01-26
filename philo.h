@@ -27,7 +27,7 @@ typedef struct s_info
 	int				eat_count_check;
 	int				each_philo_eat;
 	pthread_t		*philo_threads;
-	t_philo			**philosophers;
+	t_philo			*philosophers;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	print_mutex;
 	long			time_start;
@@ -47,7 +47,7 @@ void    thinking_process(t_philo *philo);
 void	ft_usleep(long ms);
 
 // setters.c
-t_philo	*set_philosopher(t_info *info, int id);
+void	set_philosopher(t_philo *philo, t_info *info, int id);
 int		set_info(t_info *info, int argc, char *argv[]);
 
 // main.c
