@@ -4,9 +4,8 @@ void	ft_usleep(long ms)
 {
 	long	start;
 
-    ms = ms * 1000;
 	start = get_current_time();
-	while (get_current_time() - start < ms)
+	while ((get_current_time() - start) < ms)
 		usleep(100);
 }
 
@@ -14,7 +13,7 @@ void    eating_process(t_philo *philo)
 {
     pthread_mutex_lock(philo->right_fork);
     printf("%ld %d has taken a fork\n", gtp(philo->info), philo->id);
-    pthread_mutex_lock(philo->right_fork);
+    pthread_mutex_lock(philo->left_fork);
     printf("%ld %d has taken a fork\n", gtp(philo->info), philo->id);
     philo->last_eat = get_current_time();
     pthread_mutex_lock(&(philo->eat_mutex));
