@@ -3,16 +3,21 @@
 int	start_checker(t_info *info)
 {
 	int	i;
+	int	count;
 
 	i = 0;
+	count = 0;
 	while (1)
 	{
 		if (gtp(info) - (info->philosophers[i]->last_eat * 1000)
 			> info->time_to_die)
-		{
-			printf("%ld %d died", gtp(info), id);
-			return (1);
-		}
+			return (printf("%ld %d died", gtp(info), i), 1);
+		if (info->eat_count_check == 1 && info->philosophers[i]->eat_count >= info->each_philo_eat)
+			count += info->philosophers[i]->eat_count;
+		else
+			count = 0;
+		if (count >= info->each_philo_eat * info->number_of_p)
+			return (2);
 		i++;
 		if (i > info->number_of_p) // farklı bir şekilde de yapılabilir "%" ile mesela
 			i = 0;
