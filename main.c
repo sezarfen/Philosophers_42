@@ -5,6 +5,8 @@ void	*life_of_philo(void *arg)
 	t_philo *philo;
 
 	philo = (t_philo *)arg;
+	if (philo->id % 2 == 0)
+		ft_usleep(philo->info->time_to_eat);
 	while (1)
 	{
 		eating_process(philo);
@@ -21,12 +23,12 @@ int	start_threads(t_info *info)
 	i = 0;
 	while (i < info->number_of_p)
 	{
-		p = set_philosopher(info, i);
-		if (!p)
+		info->philosophers[i] = set_philosopher(info, i);
+		if ((info->philosophers[i]) == NULL)
 			return (0);
-		if (pthread_create(&(info->philos[i]), NULL, life_of_philo, p))
+		if (pthread_create(&(info->philo_threads[i]), NULL, life_of_philo, p))
 			return (0);
-		if (pthread_detach(info->philos[i]) != 0)
+		if (pthread_detach(info->philo_threads[i]) != 0)
 			return (0);
 		i++;
 	}
@@ -38,9 +40,9 @@ int	allocate_threads(t_info *info)
 	int i;
 
 	i = 0;
-	info->philos = malloc(sizeof(pthread_t) * info->number_of_p);
+	info->philo_threads = malloc(sizeof(pthread_t) * info->number_of_p);
 	info->forks = malloc(sizeof(pthread_mutex_t) * info->number_of_p);
-	if (!info->philos || !info->forks)
+	if (!info->philo_threads || !info->forks)
 		return (0);
 	while (i < info->number_of_p)
 	{
@@ -66,11 +68,16 @@ int main(int argc, char *argv[])
 	if (argc != 5 && argc != 6)
 		return (EXIT_FAILURE);
 	if (set_info(&info, argc, argv))
-		return (message_exit_2());
+		return (message_exit_2());;;;
+	printf("aaa\n");
 	if (!check_info(&info))
 		return (message_exit());
+	printf("bbb\n");
 	if (!allocate_threads(&info))
 		return (message_exit_2());
+	printf("ccc\n");
 	if (!start_threads(&info))
 		return (message_exit_2());
+	start_checker(&info);
+	return (EXIT_SUCCESS);
 }

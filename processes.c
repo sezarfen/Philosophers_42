@@ -4,6 +4,7 @@ void	ft_usleep(long ms)
 {
 	long	start;
 
+    ms = ms * 1000;
 	start = get_current_time();
 	while (get_current_time() - start < ms)
 		usleep(100);

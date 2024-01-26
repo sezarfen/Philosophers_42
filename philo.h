@@ -7,20 +7,6 @@
 #include <pthread.h>
 #include <unistd.h>
 
-typedef struct s_info
-{
-	int				number_of_p;
-	int		 		time_to_die;
-	int				time_to_eat;
-	int			 	time_to_sleep;
-	int				eat_count_check;
-	int				each_philo_eat;
-	pthread_t		*philos;
-	pthread_mutex_t	*forks;
-	pthread_mutex_t	print_mutex;
-	long			time_start;
-}	t_info;
-
 typedef struct s_philo
 {
 	int				id;
@@ -31,6 +17,21 @@ typedef struct s_philo
 	pthread_mutex_t	eat_mutex;
 	t_info			*info;
 }	t_philo;
+
+typedef struct s_info
+{
+	int				number_of_p;
+	int		 		time_to_die;
+	int				time_to_eat;
+	int			 	time_to_sleep;
+	int				eat_count_check;
+	int				each_philo_eat;
+	pthread_t		*philo_threads;
+	t_philo			**philosophers;
+	pthread_mutex_t	*forks;
+	pthread_mutex_t	print_mutex;
+	long			time_start;
+}	t_info;
 
 // utils.c
 long	get_current_time();

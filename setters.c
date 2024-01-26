@@ -8,7 +8,7 @@ t_philo	*set_philosopher(t_info *info, int id)
 	if (!philo)
 		return (NULL);
 	philo->info = info;
-	philo->id = id;
+	philo->id = id + 1; // 1 instead of 0
 	philo->right_fork = &(info->forks[id]);
 	philo->left_fork = &(info->forks[(id + 1) % info->number_of_p]);
 	pthread_mutex_init(&(philo->eat_mutex), NULL);
@@ -33,5 +33,8 @@ int	set_info(t_info *info, int argc, char *argv[])
 	info->time_start = get_current_time();
 	if (pthread_mutex_init(&(info->print_mutex), NULL));
 		return (0);
-    return (1);
+	info->philosophers = malloc(sizeof(t_philo *) * info->number_of_p);
+    if (info->philosophers == NULL)
+		return (0);
+	return (1);
 }
