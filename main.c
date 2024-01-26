@@ -41,16 +41,16 @@ void	*life_of_philo(void *arg)
 
 int	start_threads(t_info *info)
 {
-	int		i;
-	t_philo	*p;
+	int	i;
 
 	i = 0;
 	while (i < info->number_of_p)
 	{
 		info->philosophers[i] = set_philosopher(info, i);
+		printf("deneme\n");
 		if ((info->philosophers[i]) == NULL)
 			return (0);
-		if (pthread_create(&(info->philo_threads[i]), NULL, life_of_philo, p))
+		if (pthread_create(&(info->philo_threads[i]), NULL, life_of_philo, info->philosophers[i]))
 			return (0);
 		if (pthread_detach(info->philo_threads[i]) != 0)
 			return (0);
@@ -102,6 +102,7 @@ int main(int argc, char *argv[])
 	printf("ccc\n");
 	if (!start_threads(&info))
 		return (message_exit_2());
+	printf("ddd\n");
 	start_checker(&info);
 	return (EXIT_SUCCESS);
 }

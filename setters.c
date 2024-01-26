@@ -8,9 +8,9 @@ t_philo	*set_philosopher(t_info *info, int id)
 	if (!philo)
 		return (NULL);
 	philo->info = info;
-	philo->id = id + 1; // 1 instead of 0
-	philo->right_fork = &(info->forks[id]);
-	philo->left_fork = &(info->forks[(id + 1) % info->number_of_p]);
+	philo->id = id + 1;
+	philo->right_fork = &info->forks[id];
+	philo->left_fork = &info->forks[(id + 1) % info->number_of_p];
 	pthread_mutex_init(&(philo->eat_mutex), NULL);
 	philo->last_eat = get_current_time();
 	philo->eat_count = 0;
