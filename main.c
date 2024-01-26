@@ -54,7 +54,7 @@ int	start_threads(t_info *info)
 			return (0);
 		if (pthread_detach(info->philo_threads[i]) != 0)
 			return (0);
-		i++;
+		i++;		
 	}
 	return (1);
 }

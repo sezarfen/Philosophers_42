@@ -57,5 +57,4 @@ int		start_threads(t_info *info);
 int		allocate_threads(t_info *info);
 int 	check_info(t_info *info);
 
-
 #endif /* end of PHILO_H */
