@@ -35,7 +35,7 @@ int	message_exit_2(void)
 	printf("There might be problem occurance when");
 	printf(" try to initialize the threads\n");
 	printf("! Or you can not allocate that area\n");
-	printf("Wait a second..., you didn't give any" 
+	printf("Wait a second..., you didn't give any"
 		"negative numbers don't you 🤠\n");
 	return (EXIT_FAILURE);
 }

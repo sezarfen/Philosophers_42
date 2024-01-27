@@ -29,9 +29,9 @@ int	start_checker(t_info *info, int count, int i)
 			&& count >= info->each_philo_eat * info->number_of_p)
 			return (printf("Everybody eaten\n"), 2);
 		pthread_mutex_unlock(&(info->philosophers[i].eat_mutex));
-		i++; //2 philo varsa bu 2. döngüde değeri 1 olur ve 2ye artar
-		if (i == info->number_of_p) //ama bu kontrol 2 > 2 true olmadığı için i'ye 0 atanmaz
-			i = 0; //dolayısıyla 3. bir philosof varmış gibi kontrol yapılır
+		i++;
+		if (i >= info->number_of_p)
+			i = 0;
 	}
 }
 
@@ -79,7 +79,7 @@ int	main(int argc, char *argv[])
 	t_info	info;
 
 	if (argc != 5 && argc != 6)
-		return (EXIT_FAILURE);
+		return (message_exit());
 	if (!set_info(&info, argc, argv))
 		return (message_exit_2());
 	if (!check_info(&info))
