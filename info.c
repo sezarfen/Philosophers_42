@@ -38,3 +38,11 @@ int	set_info(t_info *info, int argc, char *argv[])
 		return (0);
 	return (1);
 }
+
+int	free_all(t_info *info)
+{
+	free(info->philo_threads);
+	free(info->philosophers);
+	free(info->forks);
+	return (1);
+}

@@ -54,6 +54,7 @@ int		allocate_threads_and_philos(t_info *info);
 // info.c
 int		check_info(t_info *info);
 int		set_info(t_info *info, int argc, char *argv[]);
+int		free_all(t_info *info);
 
 // philosopher.c
 void	eating_process(t_philo *philo);
@@ -71,5 +72,6 @@ int		message_exit(void);
 int		message_exit_2(void);
 long	ft_atol(char *str);
 void	ft_usleep(long ms);
+int		check_result(long result);
 
 #endif /* end of PHILO_H */

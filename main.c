@@ -85,9 +85,10 @@ int	main(int argc, char *argv[])
 	if (!check_info(&info))
 		return (message_exit());
 	if (!allocate_threads_and_philos(&info))
-		return (message_exit_2());
+		return (free_all(&info), message_exit_2());
 	if (!start_threads(&info))
-		return (message_exit_2());
+		return (free_all(&info), message_exit_2());
 	start_checker(&info, 0x000, 0b000);
+	free_all(&info);
 	return (EXIT_SUCCESS);
 }
