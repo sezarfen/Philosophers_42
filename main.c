@@ -16,12 +16,10 @@ int	start_checker(t_info *info, int count, int i)
 {
 	while (1)
 	{
-		pthread_mutex_lock(&(info->philosophers[i].last_eat_mutex));
+		pthread_mutex_lock(&(info->philosophers[i].eat_mutex));
 		if (get_current_time() - info->philosophers[i].last_eat
 			> info->time_to_die)
 			return (printf("%ld %d died\n", gtp(info), i), 1);
-		pthread_mutex_unlock(&(info->philosophers[i].last_eat_mutex));
-		pthread_mutex_lock(&(info->philosophers[i].eat_mutex));
 		if (info->eat_count_check == 1
 			&& info->philosophers[i].eat_count >= info->each_philo_eat)
 			count += info->philosophers[i].eat_count;

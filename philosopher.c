@@ -18,10 +18,8 @@ void	eating_process(t_philo *philo)
 	printf("%ld %d has taken a fork\n", gtp(philo->info), philo->id);
 	pthread_mutex_lock(philo->left_fork);
 	printf("%ld %d has taken a fork\n", gtp(philo->info), philo->id);
-	pthread_mutex_lock(&(philo->last_eat_mutex));
-	philo->last_eat = get_current_time();
-	pthread_mutex_unlock(&(philo->last_eat_mutex));
 	pthread_mutex_lock(&(philo->eat_mutex));
+	philo->last_eat = get_current_time();
 	philo->eat_count++;
 	pthread_mutex_unlock(&(philo->eat_mutex));
 	printf("%ld %d is eating\n", gtp(philo->info), philo->id);
@@ -65,7 +63,6 @@ void	set_philosopher(t_philo *philo, t_info *info, int id)
 	philo->right_fork = &(info->forks[id]);
 	philo->left_fork = &(info->forks[(id + 1) % info->number_of_p]);
 	pthread_mutex_init(&(philo->eat_mutex), NULL);
-	pthread_mutex_init(&(philo->last_eat_mutex), NULL);
 	philo->last_eat = get_current_time();
 	philo->eat_count = 0;
 }
