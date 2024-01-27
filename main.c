@@ -31,9 +31,9 @@ int	start_checker(t_info *info, int count, int i)
 			&& count >= info->each_philo_eat * info->number_of_p)
 			return (printf("Everybody eaten\n"), 2);
 		pthread_mutex_unlock(&(info->philosophers[i].eat_mutex));
-		i++;
-		if (i > info->number_of_p)
-			i = 0;
+		i++; //2 philo varsa bu 2. döngüde değeri 1 olur ve 2ye artar
+		if (i == info->number_of_p) //ama bu kontrol 2 > 2 true olmadığı için i'ye 0 atanmaz
+			i = 0; //dolayısıyla 3. bir philosof varmış gibi kontrol yapılır
 	}
 }
 
@@ -75,10 +75,12 @@ int	allocate_threads(t_info *info)
 	return (1);
 }
 
+// #include <stdio.h>
 int	main(int argc, char *argv[])
 {
 	t_info	info;
 
+	// printf("%ld\n", get_current_time());
 	if (argc != 5 && argc != 6)
 		return (EXIT_FAILURE);
 	if (!set_info(&info, argc, argv))

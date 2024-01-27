@@ -20,7 +20,7 @@ void	eating_process(t_philo *philo)
 	printf("%ld %d has taken a fork\n", gtp(philo->info), philo->id);
 	pthread_mutex_lock(&(philo->last_eat_mutex));
 	philo->last_eat = get_current_time();
-	pthread_mutex_lock(&(philo->last_eat_mutex));
+	pthread_mutex_unlock(&(philo->last_eat_mutex));
 	pthread_mutex_lock(&(philo->eat_mutex));
 	philo->eat_count++;
 	pthread_mutex_unlock(&(philo->eat_mutex));

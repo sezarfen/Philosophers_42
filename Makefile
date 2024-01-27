@@ -3,7 +3,7 @@ SRCS=info.c main.c philosopher.c times.c utils.c
 OBJS=$(SRCS:.c=.o)
 CFLAGS= -Werror -Wall -Wextra
 CC=gcc
-PT=-pthread -fsanitize=thread
+PT=-pthread #-fsanitize=thread
 
 all: $(NAME)
 
