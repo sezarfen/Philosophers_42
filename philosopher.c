@@ -24,8 +24,8 @@ void	eating_process(t_philo *philo)
 	pthread_mutex_unlock(&(philo->eat_mutex));
 	printf("%ld %d is eating\n", gtp(philo->info), philo->id);
 	ft_usleep(philo->info->time_to_eat);
-	pthread_mutex_unlock(philo->right_fork);
 	pthread_mutex_unlock(philo->left_fork);
+	pthread_mutex_unlock(philo->right_fork);
 }
 
 void	sleeping_process(t_philo *philo)
