@@ -12,18 +12,16 @@
 
 #include "philo.h"
 
-int	start_checker(t_info *info)
+int	start_checker(t_info *info, int count, int i)
 {
-	int	count;
-	int	i;
-
-	i = 0;
-	count = 0;
 	while (1)
 	{
+		pthread_mutex_lock(&(info->philosophers[i].last_eat_mutex));
 		if (get_current_time() - info->philosophers[i].last_eat
 			> info->time_to_die)
 			return (printf("%ld %d died\n", gtp(info), i), 1);
+		pthread_mutex_unlock(&(info->philosophers[i].last_eat_mutex));
+		pthread_mutex_lock(&(info->philosophers[i].eat_mutex));
 		if (info->eat_count_check == 1
 			&& info->philosophers[i].eat_count >= info->each_philo_eat)
 			count += info->philosophers[i].eat_count;
@@ -32,6 +30,7 @@ int	start_checker(t_info *info)
 		if (info->eat_count_check == 1
 			&& count >= info->each_philo_eat * info->number_of_p)
 			return (printf("Everybody eaten\n"), 2);
+		pthread_mutex_unlock(&(info->philosophers[i].eat_mutex));
 		i++;
 		if (i > info->number_of_p)
 			i = 0;
@@ -90,6 +89,6 @@ int	main(int argc, char *argv[])
 		return (message_exit_2());
 	if (!start_threads(&info))
 		return (message_exit_2());
-	start_checker(&info);
+	start_checker(&info, 0000, 0000);
 	return (EXIT_SUCCESS);
 }
