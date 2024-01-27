@@ -43,6 +43,7 @@ int	start_threads(t_info *info)
 	int	i;
 
 	i = 0;
+	info->start_eating = 0;
 	while (i < info->number_of_p)
 	{
 		set_philosopher(&(info->philosophers[i]), info, i);
@@ -53,6 +54,7 @@ int	start_threads(t_info *info)
 			return (0);
 		i++;
 	}
+	info->start_eating = 1;
 	return (1);
 }
 

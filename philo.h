@@ -25,6 +25,7 @@ typedef struct s_philo
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*right_fork;
 	long			last_eat;
+	pthread_mutex_t last_eat_mutex;
 	int				eat_count;
 	pthread_mutex_t	eat_mutex;
 	struct s_info	*info;
@@ -43,6 +44,7 @@ typedef struct s_info
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	print_mutex;
 	long			time_start;
+	short			start_eating;
 }	t_info;
 
 // main.c
