@@ -73,12 +73,10 @@ int	allocate_threads(t_info *info)
 	return (1);
 }
 
-// #include <stdio.h>
 int	main(int argc, char *argv[])
 {
 	t_info	info;
 
-	// printf("%ld\n", get_current_time());
 	if (argc != 5 && argc != 6)
 		return (EXIT_FAILURE);
 	if (!set_info(&info, argc, argv))
@@ -89,6 +87,6 @@ int	main(int argc, char *argv[])
 		return (message_exit_2());
 	if (!start_threads(&info))
 		return (message_exit_2());
-	start_checker(&info, 0000, 0000);
+	start_checker(&info, 0x000, 0b000);
 	return (EXIT_SUCCESS);
 }

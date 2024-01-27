@@ -32,12 +32,12 @@ typedef struct s_philo
 
 typedef struct s_info
 {
-	int				number_of_p;
-	int				time_to_die;
-	int				time_to_eat;
-	int				time_to_sleep;
-	int				eat_count_check;
-	int				each_philo_eat;
+	long			number_of_p;
+	long			time_to_die;
+	long			time_to_eat;
+	long			time_to_sleep;
+	long			eat_count_check;
+	long			each_philo_eat;
 	pthread_t		*philo_threads;
 	t_philo			*philosophers;
 	pthread_mutex_t	*forks;
@@ -69,7 +69,7 @@ long	get_current_time(void);
 // utils.c
 int		message_exit(void);
 int		message_exit_2(void);
-int		ft_atoi(char *str);
+long	ft_atol(char *str);
 void	ft_usleep(long ms);
 
 #endif /* end of PHILO_H */

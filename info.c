@@ -22,19 +22,21 @@ int	check_info(t_info *info)
 
 int	set_info(t_info *info, int argc, char *argv[])
 {
-	info->number_of_p = ft_atoi(argv[1]);
-	info->time_to_die = ft_atoi(argv[2]);
-	info->time_to_eat = ft_atoi(argv[3]);
-	info->time_to_sleep = ft_atoi(argv[4]);
+	info->number_of_p = ft_atol(argv[1]);
+	info->time_to_die = ft_atol(argv[2]);
+	info->time_to_eat = ft_atol(argv[3]);
+	info->time_to_sleep = ft_atol(argv[4]);
 	info->eat_count_check = -1;
 	info->each_philo_eat = -1;
 	if (argc == 6)
 	{
 		info->eat_count_check = 1;
-		info->each_philo_eat = ft_atoi(argv[5]);
+		info->each_philo_eat = ft_atol(argv[5]);
 	}
 	info->time_start = get_current_time();
 	if (pthread_mutex_init(&(info->print_mutex), NULL) != 0)
+		return (0);
+	if (info->number_of_p < 0)
 		return (0);
 	info->philosophers = malloc(sizeof(t_philo) * info->number_of_p);
 	if (info->philosophers == NULL)

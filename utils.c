@@ -12,13 +12,21 @@
 
 #include "philo.h"
 
+int	check_result(long result)
+{
+	if (result > 0xffffffff)
+		return (0);
+	return (1);
+}
+
 int	message_exit(void)
 {
 	printf("Please use the syntax below:\n");
 	printf("./philo [number of philosophers] "
 		"[time to die] [time to eat] [time to sleep]\n");
 	printf("You can also add [number that each philosopher should eat]\n");
-	printf("!!!And don't forget, giving natural numbers\n");
+	printf("!!!And don't forget to give positive numbers,"
+		"if you want the simulation make sense\n");
 	return (EXIT_FAILURE);
 }
 
@@ -27,14 +35,16 @@ int	message_exit_2(void)
 	printf("There might be problem occurance when");
 	printf(" try to initialize the threads\n");
 	printf("! Or you can not allocate that area\n");
+	printf("Wait a second..., you didn't give any" 
+		"negative numbers don't you 🤠\n");
 	return (EXIT_FAILURE);
 }
 
-int	ft_atoi(char *str)
+long	ft_atol(char *str)
 {
-	int	i;
-	int	n;
-	int	result;
+	int		i;
+	int		n;
+	long	result;
 
 	i = 0;
 	n = 1;
@@ -48,7 +58,11 @@ int	ft_atoi(char *str)
 		i++;
 	}
 	while (str[i] <= '9' && str[i] >= '0')
+	{
 		result = (result * 10) + (str[i++] - 48);
+		if (check_result(result) == 0)
+			return (-1);
+	}
 	return (result * n);
 }
 
