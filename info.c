@@ -36,10 +36,5 @@ int	set_info(t_info *info, int argc, char *argv[])
 	info->time_start = get_current_time();
 	if (pthread_mutex_init(&(info->print_mutex), NULL) != 0)
 		return (0);
-	if (info->number_of_p < 0)
-		return (0);
-	info->philosophers = malloc(sizeof(t_philo) * info->number_of_p);
-	if (info->philosophers == NULL)
-		return (0);
 	return (1);
 }

@@ -49,7 +49,7 @@ typedef struct s_info
 // main.c
 int		start_checker(t_info *info, int count, int i);
 int		start_threads(t_info *info);
-int		allocate_threads(t_info *info);
+int		allocate_threads_and_philos(t_info *info);
 
 // info.c
 int		check_info(t_info *info);

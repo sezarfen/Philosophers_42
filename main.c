@@ -55,14 +55,15 @@ int	start_threads(t_info *info)
 	return (1);
 }
 
-int	allocate_threads(t_info *info)
+int	allocate_threads_and_philos(t_info *info)
 {
 	int	i;
 
 	i = 0;
 	info->philo_threads = malloc(sizeof(pthread_t) * info->number_of_p);
+	info->philosophers = malloc(sizeof(t_philo) * info->number_of_p);
 	info->forks = malloc(sizeof(pthread_mutex_t) * info->number_of_p);
-	if (!info->philo_threads || !info->forks)
+	if (!info->philo_threads || !info->forks || !info->philosophers)
 		return (0);
 	while (i < info->number_of_p)
 	{
@@ -83,7 +84,7 @@ int	main(int argc, char *argv[])
 		return (message_exit_2());
 	if (!check_info(&info))
 		return (message_exit());
-	if (!allocate_threads(&info))
+	if (!allocate_threads_and_philos(&info))
 		return (message_exit_2());
 	if (!start_threads(&info))
 		return (message_exit_2());
