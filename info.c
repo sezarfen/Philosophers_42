@@ -17,7 +17,7 @@ int	check_info(t_info *info)
 	if (info->eat_count_check == 1 && info->each_philo_eat < 0)
 		return (0);
 	return (info->number_of_p > 0 && info->time_to_die > 0
-		&& info->time_to_eat && info->time_to_sleep);
+		&& info->time_to_eat > 0 && info->time_to_sleep > 0);
 }
 
 int	set_info(t_info *info, int argc, char *argv[])
