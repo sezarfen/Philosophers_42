@@ -15,14 +15,20 @@
 void	eating_process(t_philo *philo)
 {
 	pthread_mutex_lock(philo->right_fork);
+	pthread_mutex_lock(philo->info->print_mutex);
 	printf("%ld %d has taken a fork\n", gtp(philo->info), philo->id);
+	pthread_mutex_unlock(philo->info->print_mutex);
 	pthread_mutex_lock(philo->left_fork);
+	pthread_mutex_lock(philo->info->print_mutex);
 	printf("%ld %d has taken a fork\n", gtp(philo->info), philo->id);
+	pthread_mutex_unlock(philo->info->print_mutex);
 	pthread_mutex_lock(&(philo->eat_mutex));
 	philo->last_eat = get_current_time();
 	philo->eat_count++;
 	pthread_mutex_unlock(&(philo->eat_mutex));
+	pthread_mutex_lock(philo->info->print_mutex);
 	printf("%ld %d is eating\n", gtp(philo->info), philo->id);
+	pthread_mutex_unlock(philo->info->print_mutex);
 	ft_usleep(philo->info->time_to_eat);
 	pthread_mutex_unlock(philo->left_fork);
 	pthread_mutex_unlock(philo->right_fork);
@@ -30,13 +36,17 @@ void	eating_process(t_philo *philo)
 
 void	sleeping_process(t_philo *philo)
 {
+	pthread_mutex_lock(philo->info->print_mutex);
 	printf("%ld %d is sleeping\n", gtp(philo->info), philo->id);
+	pthread_mutex_unlock(philo->info->print_mutex);
 	ft_usleep(philo->info->time_to_sleep);
 }
 
 void	thinking_process(t_philo *philo)
 {
+	pthread_mutex_lock(philo->info->print_mutex);
 	printf("%ld %d is thinking\n", gtp(philo->info), philo->id);
+	pthread_mutex_unlock(philo->info->print_mutex);
 }
 
 void	*life_of_philo(void *arg)
