@@ -19,7 +19,10 @@ int	start_checker(t_info *info, int count, int i)
 		pthread_mutex_lock(&(info->philosophers[i].eat_mutex));
 		if (get_current_time() - info->philosophers[i].last_eat
 			> info->time_to_die)
+		{
+			pthread_mutex_lock(&(info->print_mutex));
 			return (printf("%ld %d died\n", gtp(info), i + 1), 1);
+		}
 		if (info->eat_count_check == 1
 			&& info->philosophers[i].eat_count >= info->each_philo_eat)
 			count += info->philosophers[i].eat_count;
@@ -27,7 +30,7 @@ int	start_checker(t_info *info, int count, int i)
 			count = 0;
 		if (info->eat_count_check == 1
 			&& count >= info->each_philo_eat * info->number_of_p)
-			return (printf("Everybody eaten\n"), 2);
+			return (pthread_mutex_lock(&(info->print_mutex)), 2);
 		pthread_mutex_unlock(&(info->philosophers[i].eat_mutex));
 		i++;
 		if (i >= info->number_of_p)
